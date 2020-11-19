@@ -1,0 +1,42 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    margin-top: 10px;
+    margin-left: 75px;
+}
+
+.nav-links {
+    margin-top: 10px;
+    margin-right: 75px;
+}
+
+.nav-links a {
+    background-color: white;
+    text-decoration: none;
+    color: black;
+    border-radius: 5px;
+    float: right;
+    padding: 10px;
+    margin: 10px;
+}
+
+.nav-links button {
+    background-color: #4CAF50;
+    text-decoration: none;
+    font-size: 15px;
+    border: 1px solid lightgrey;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    float: right;
+    padding: 10px;
+    margin: 10px;
+}
+
+.nav-links button:hover {
+    background-color: #45a049;
+}
+
