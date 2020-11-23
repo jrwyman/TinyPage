@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 import session from './session_reducer';
+import posts from './posts_reducer';
 
 const RootReducer = combineReducers({
-    session // { isAutheticated: true, user: {} }
+    session, posts
 });
 
 export default RootReducer;

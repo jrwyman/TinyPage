@@ -1,6 +1,7 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-class Profile extends React.Component {
+class Post extends React.Component {
     constructor(props) {
         super(props);
 
@@ -10,7 +11,7 @@ class Profile extends React.Component {
     }
 
     componentWillMount() {
-        this.props.fetchUserPosts(this.props.currentUser.id);
+        this.props.fetchPosts();
     }
 
     componentWillReceiveProps(newState) {
@@ -19,11 +20,11 @@ class Profile extends React.Component {
 
     render() {
         if (this.state.posts.length === 0) {
-            return (<div>This user has no Posts</div>)
+            return (<div>There are no Posts</div>)
         } else {
             return (
                 <div>
-                    <h2>My Posts</h2>
+                    <h2>All Posts</h2>
                     {this.state.posts.map(post => (
                         <li key={post._id}>{post.text}</li> 
                     ))}
@@ -33,4 +34,4 @@ class Profile extends React.Component {
     }
 }
 
-export default Profile;
+export default withRouter(Post);

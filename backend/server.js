@@ -3,9 +3,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const PORT = 5000;
-const users = require("./routes/users");
 const db = require('./config/keys').mongoURI;
 const passport = require('passport');
+
+const users = require('./routes/users');
+const posts = require('./routes/posts')
 
 mongoose
     .connect(db, { useUnifiedTopology: true, useNewUrlParser: true })
@@ -19,7 +21,8 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 
-app.use("/users", users);     //models go here
+app.use("/users", users);
+app.use("/posts", posts);
 
 
 app.listen(PORT, function () {

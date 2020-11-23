@@ -8,14 +8,6 @@ const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 const User = require('../models/User');
 
-router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
-    res.json({
-        id: req.user.id,
-        username: req.user.username,
-        email: req.user.email
-    });
-})
-
 router.post("/register", (req, res) => {
     const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -75,7 +67,7 @@ router.post("/login", (req, res) => {
 
         bcrypt.compare(password, user.password).then(isMatch => {
             if (isMatch) {
-                const payload = { id: user.id, email: user.email };
+                const payload = { id: user.id, email: user.email, username: user.username };
 
                 jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
                     res.json({

@@ -42,7 +42,7 @@
     padding: 20px; 
 }
 
-input[type=submit] {
+.login-submit {
   background-color: #4CAF50;
   color: white;
   padding: 15px 20px;
@@ -53,6 +53,6 @@ input[type=submit] {
   font-weight: bold;
 }
 
-input[type=submit]:hover {
+.login-submit:hover {
   background-color: #45a049;
 }
