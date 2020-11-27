@@ -9,6 +9,8 @@ const passport = require('passport');
 const users = require('./routes/users');
 const posts = require('./routes/posts')
 
+mongoose.set('debug', true);
+
 mongoose
     .connect(db, { useUnifiedTopology: true, useNewUrlParser: true })
     .then(() => console.log("Connected to MongoDB successfully"))

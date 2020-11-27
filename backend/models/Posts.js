@@ -3,13 +3,17 @@ const Schema = mongoose.Schema;
 
 const postsSchema = new Schema({
     user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+        id: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        username: String
     },
     text: {
         type: String,
         required: true
     },
+    username: String
 }, {
     timestamps: true
 })

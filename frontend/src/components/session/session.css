@@ -56,3 +56,18 @@
 .login-submit:hover {
   background-color: #45a049;
 }
+
+.signup-submit {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.signup-submit:hover {
+  background-color: #45a049;
+}

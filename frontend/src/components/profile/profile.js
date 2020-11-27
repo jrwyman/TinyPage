@@ -1,4 +1,5 @@
 import React from 'react';
+import './profile.css';
 
 class Profile extends React.Component {
     constructor(props) {
@@ -22,11 +23,15 @@ class Profile extends React.Component {
             return (<div>This user has no Posts</div>)
         } else {
             return (
-                <div>
-                    <h2>My Posts</h2>
-                    {this.state.posts.map(post => (
-                        <li key={post._id}>{post.text}</li> 
-                    ))}
+                <div className="profile-card">
+                    <h1 className="profile-header">{this.props.currentUser.username}</h1>
+                    <ul>
+                        {this.state.posts.map(post => (
+                            <div className="profile-post-text" key={post._id}>
+                                <li>{post.text}</li>
+                            </div>
+                        ))}
+                    </ul>
                 </div>
             );
         }

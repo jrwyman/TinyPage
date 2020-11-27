@@ -37,7 +37,7 @@ class NavBar extends React.Component {
 
     renderLogo() {
         return (
-            <img className="logo" src={logo} alt="logo" width="200px" />
+            <img className="logo" src={logo} alt="logo" width="100px" />
         )
     }
 

@@ -79,7 +79,7 @@ class SignupForm extends React.Component {
                             onChange={this.update('password2')}
                             placeholder="Confirm Password"
                         />
-                        <input type="submit" value="Sign Up" />
+                        <input className="signup-submit" type="submit" value="Sign Up" />
                         {this.renderErrors()}
                     </div>
                 </form>

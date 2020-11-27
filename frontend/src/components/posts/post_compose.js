@@ -19,7 +19,7 @@ class PostCompose extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         let post = {
-            text: this.state.text
+            text: this.state.text,
         };
 
         this.props.composePost(post);
