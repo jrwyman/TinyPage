@@ -1,8 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import './posts.css';
+import './feed.css';
+import PostComposeContainer from '../posts/post_compose_container';
 
-class Post extends React.Component {
+class Feed extends React.Component {
     constructor(props) {
         super(props);
 
@@ -24,20 +25,21 @@ class Post extends React.Component {
             return (<div>There are no Posts</div>)
         } else {
             return (
-                <div className="posts-card">
-                    <h2 className="posts-header">All Posts</h2>
-                    <ul>
+                <div className="feed-card">
+                    <h2>Your Feed</h2>
+                    <PostComposeContainer />
+                    <div className="feed-posts">
                         {this.state.posts.map(post => (
-                            <div className="posts-post-text" key={post._id}>
+                            <div className="feed-post" key={post._id}>
                                 <h3>{post.user.username}</h3>
-                                <li>{post.text}</li>
+                                <p className="feed-post-text">{post.text}</p>
                             </div>
                         ))}
-                    </ul>
+                    </div>
                 </div>
-            );
+            )
         }
     }
 }
 
-export default withRouter(Post);
+export default withRouter(Feed);

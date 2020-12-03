@@ -24,7 +24,7 @@
 }
 
 .nav-links button {
-    background-color: #4CAF50;
+    background-color: #4551fd;
     text-decoration: none;
     font-size: 15px;
     border: 1px solid lightgrey;
@@ -37,6 +37,6 @@
 }
 
 .nav-links button:hover {
-    background-color: #45a049;
+    background-color: #1423f5;
 }
 

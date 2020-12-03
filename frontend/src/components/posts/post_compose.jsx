@@ -1,4 +1,5 @@
 import React from 'react';
+import './post_compose.css'
 
 class PostCompose extends React.Component {
     constructor(props) {
@@ -10,10 +11,15 @@ class PostCompose extends React.Component {
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.renderErrors = this.renderErrors.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {  //deprecated
-        this.setState({ newPost: nextProps.newPost.text });
+        if (nextProps.newPost) {
+            this.setState({ newPost: nextProps.newPost.text });
+        }
+        
+        this.setState({ errors: nextProps.errors });
     }
 
     handleSubmit(e) {
@@ -32,20 +38,36 @@ class PostCompose extends React.Component {
         });
     }
 
+    renderErrors() {
+        if (this.props.errors) {
+            return (
+                <ul>
+                    {Object.keys(this.props.errors).map((error) => (
+                        <li key={`error-${error}`}>
+                            {this.props.errors[error]}
+                        </li>
+                    ))}
+                </ul>
+            );
+        }
+    }
+
     render() {
         return (
-            <div>
+            <div className="post-compose-card">
                 <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <input type="textarea"
+                    <div className="post-compose-form">
+                        <h3>Create Post</h3>
+                        <textarea
                             value={this.state.text}
                             onChange={this.update()}
                             placeholder="Write your post..."
+                            className="post-compose-text"
                         />
-                        <input type="submit" value="Post" />
+                        <input type="submit" value="Post" className="post-compose-submit" />
+                        {this.renderErrors()}
                     </div>
                 </form>
-                <br />
             </div>
         )
     }

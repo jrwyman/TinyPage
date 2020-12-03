@@ -3,6 +3,7 @@ import { getPosts, getUserPosts, writePost } from '../util/post_util';
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const RECEIVE_NEW_POST = "RECEIVE_NEW_POST";
 export const RECEIVE_USER_POSTS = "RECEIVE_USER_POSTS";
+export const RECEIVE_POST_ERRORS = "RECEIVE_POST_ERRORS";
 
 export const receivePosts = posts => ({
     type: RECEIVE_POSTS,
@@ -19,6 +20,11 @@ export const receiveNewPost = post => ({
     post
 })
 
+export const receivePostErrors = errors => ({
+    type: RECEIVE_POST_ERRORS,
+    errors
+});
+
 export const fetchPosts = () => dispatch => (
     getPosts()
         .then(posts => dispatch(receivePosts(posts)))
@@ -34,5 +40,5 @@ export const fetchUserPosts = id => dispatch => (
 export const composePost = data => dispatch => (
     writePost(data)
         .then(post => dispatch(receiveNewPost(post)))
-        .catch(err => console.log(err))
-);
+        .catch(err => dispatch(receivePostErrors(err.response.data)))
+)

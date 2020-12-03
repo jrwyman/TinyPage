@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const postsSchema = new Schema({
+const postSchema = new Schema({
     user: {
         id: {
             type: Schema.Types.ObjectId,
@@ -18,4 +18,4 @@ const postsSchema = new Schema({
     timestamps: true
 })
 
-module.exports = Posts = mongoose.model('Posts', postsSchema);
+module.exports = Post = mongoose.model('Post', postSchema);

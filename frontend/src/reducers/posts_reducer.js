@@ -1,13 +1,15 @@
 import { 
     RECEIVE_POSTS,
     RECEIVE_USER_POSTS, 
-    RECEIVE_NEW_POST 
+    RECEIVE_NEW_POST,
+    RECEIVE_POST_ERRORS,
 } from '../actions/post_actions';
 
 const initialState = {
     all: {},
     user: {},
-    new: undefined
+    new: undefined,
+    errors: [],
 }
 
 export default function (state = initialState, action) {
@@ -23,6 +25,11 @@ export default function (state = initialState, action) {
         case RECEIVE_NEW_POST:
             newState.new = action.post.data
             return newState;
+        case RECEIVE_POST_ERRORS:
+            return {
+                ...state,
+                errors: action.errors
+            }
         default:
             return state;
     }

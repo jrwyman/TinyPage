@@ -6,7 +6,7 @@ import NavBarContainer from './nav/navbar_container';
 import ProfileContainer from './profile/profile_container';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
-import PostsContainer from './posts/posts_container';
+import FeedContainer from './feed/feed_container';
 import PostComposeContainer from './posts/post_compose_container';
 
 import './app.css'
@@ -19,7 +19,7 @@ const App = () => (
             <AuthRoute exact path="/signup" component={SignupFormContainer} />
 
             <ProtectedRoute exact path="/profile" component={ProfileContainer} />
-            <ProtectedRoute exact path="/posts" component={PostsContainer} />
+            <ProtectedRoute exact path="/feed" component={FeedContainer} />
             <ProtectedRoute exact path="/new_post" component={PostComposeContainer} />
         </Switch>
     </div>
