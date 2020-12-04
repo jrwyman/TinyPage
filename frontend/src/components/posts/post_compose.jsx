@@ -14,18 +14,11 @@ class PostCompose extends React.Component {
         this.renderErrors = this.renderErrors.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {  //deprecated
-        if (nextProps.newPost) {
-            this.setState({ newPost: nextProps.newPost.text });
-        }
-        
-        this.setState({ errors: nextProps.errors });
-    }
-
     handleSubmit(e) {
+        const { text } = this.state;
         e.preventDefault();
         let post = {
-            text: this.state.text,
+            text: text,
         };
 
         this.props.composePost(post);
@@ -39,12 +32,13 @@ class PostCompose extends React.Component {
     }
 
     renderErrors() {
-        if (this.props.errors) {
+        const { errors } = this.props;
+        if (errors) {
             return (
                 <ul>
-                    {Object.keys(this.props.errors).map((error) => (
+                    {Object.keys(errors).map((error) => (
                         <li key={`error-${error}`}>
-                            {this.props.errors[error]}
+                            {errors[error]}
                         </li>
                     ))}
                 </ul>
@@ -53,13 +47,14 @@ class PostCompose extends React.Component {
     }
 
     render() {
+        const { text } = this.state;
         return (
             <div className="post-compose-card">
                 <form onSubmit={this.handleSubmit}>
                     <div className="post-compose-form">
                         <h3>Create Post</h3>
                         <textarea
-                            value={this.state.text}
+                            value={text}
                             onChange={this.update()}
                             placeholder="Write your post..."
                             className="post-compose-text"

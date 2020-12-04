@@ -13,8 +13,8 @@ router.get('/', (req, res) => {
         .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
 });
 
-router.get('/user/:user_id', (req, res) => {
-    Post.find({ user: { id: req.params.user_id } })   /* THE ISSUE WITH PROFILE CARD NOT SHOWING POSTS IS HERE */
+router.get('/user/:user_id', (req, res) => {                    // WILL BE IMPLEMENTED LATER
+    Post.find({ user: { id: req.params.user_id } })
         .then(posts => res.json(posts))
         .catch(err => res.status(404).json({ nopostsfound: 'No posts found from that user' }));
 });
@@ -36,5 +36,13 @@ router.post('/',
         newPost.save().then(post => res.json(post));
     }
 );
+
+router.delete('/:id',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        const post = Post.findById(req.params.id);
+        post.delete().then(post => res.json(post));
+    }
+)
 
 module.exports = router;
