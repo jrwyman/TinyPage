@@ -5,20 +5,19 @@
     align-items: center;
 }
 
-.profile-header {
-    align-self: flex-start;
-    margin-left: 50px;
-} 
+.profile-post {
+    padding: 50px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .1);
+    width: 500px;
+    background-color: white;
+}
 
-.profile-post-text {
-    background-color: green;
+.profile-post {
+    
 }
 
 .profile-post-text {
-    padding: 50px;
-    margin: 10px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, .1);
-    width: 300px;
-    background-color: white;
+    overflow-wrap: break-word;
 }
