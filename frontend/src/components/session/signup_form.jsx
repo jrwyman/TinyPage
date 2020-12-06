@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './session.css';
 
 class SignupForm extends React.Component {
@@ -17,21 +18,26 @@ class SignupForm extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.signedIn === true) {
-      this.props.history.push('/login');
+    const { signedIn, history } = this.props;
+    if (signedIn === true) {
+      history.push('/login');
     }
   }
 
   handleSubmit(e) {
+    const {
+      email, username, password, password2,
+    } = this.state;
+    const { history, signup } = this.props;
     e.preventDefault();
     const user = {
-      email: this.state.email,
-      username: this.state.username,
-      password: this.state.password,
-      password2: this.state.password2,
+      email,
+      username,
+      password,
+      password2,
     };
 
-    this.props.signup(user, this.props.history);
+    signup(user, history);
   }
 
   update(field) {
@@ -41,12 +47,13 @@ class SignupForm extends React.Component {
   }
 
   renderErrors() {
-    if (this.props.errors) {
+    const { errors } = this.props;
+    if (errors) {
       return (
         <ul>
-          {Object.keys(this.props.errors).map((error) => (
+          {Object.keys(errors).map((error) => (
             <li key={`error-${error}`}>
-              {this.props.errors[error]}
+              {errors[error]}
             </li>
           ))}
         </ul>
@@ -56,31 +63,34 @@ class SignupForm extends React.Component {
   }
 
   render() {
+    const {
+      email, username, password, password2,
+    } = this.state;
     return (
       <div className="signup-form-container">
         <form onSubmit={this.handleSubmit}>
           <div className="signup-form">
             <input
               type="text"
-              value={this.state.email}
+              value={email}
               onChange={this.update('email')}
               placeholder="Email"
             />
             <input
               type="text"
-              value={this.state.username}
+              value={username}
               onChange={this.update('username')}
               placeholder="Username"
             />
             <input
               type="password"
-              value={this.state.password}
+              value={password}
               onChange={this.update('password')}
               placeholder="Password"
             />
             <input
               type="password"
-              value={this.state.password2}
+              value={password2}
               onChange={this.update('password2')}
               placeholder="Confirm Password"
             />
@@ -92,5 +102,12 @@ class SignupForm extends React.Component {
     );
   }
 }
+
+SignupForm.propTypes = {
+  signedIn: PropTypes.bool.isRequired,
+  signup: PropTypes.func.isRequired,
+  errors: PropTypes.instanceOf(Array).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
+};
 
 export default withRouter(SignupForm);

@@ -1,15 +1,18 @@
 import React from 'react';
-import './profile.css';
+import PropTypes from 'prop-types';
 import PostComposeContainer from '../posts/post_compose_container';
+import './profile.css';
 
 class Profile extends React.Component {
   componentDidMount() {
-    this.props.fetchUserPosts(this.props.currentUser.id);
+    const { fetchUserPosts, currentUser } = this.props;
+    fetchUserPosts(currentUser.id);
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.newPost !== prevProps.newPost) {
-      this.props.fetchUserPosts(this.props.currentUser.id);
+    const { newPost, fetchUserPosts, currentUser } = this.props;
+    if (newPost !== prevProps.newPost) {
+      fetchUserPosts(currentUser.id);
     }
   }
 
@@ -24,7 +27,7 @@ class Profile extends React.Component {
         <PostComposeContainer />
         <div className="profile-posts">
           {posts.map((post) => (
-            <div className="profile-post" key={post._id}>
+            <div className="profile-post" key={post.id}>
               <p className="profile-post-text">{post.text}</p>
             </div>
           ))}
@@ -33,5 +36,12 @@ class Profile extends React.Component {
     );
   }
 }
+
+Profile.propTypes = {
+  posts: PropTypes.instanceOf(Array).isRequired,
+  newPost: PropTypes.instanceOf(Object).isRequired,
+  currentUser: PropTypes.instanceOf(Object).isRequired,
+  fetchUserPosts: PropTypes.func.isRequired,
+};
 
 export default Profile;

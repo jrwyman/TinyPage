@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import logo from './TinyPage.png';
 import './nav.css';
 
@@ -11,7 +12,8 @@ class NavBar extends React.Component {
   }
 
   getLinks() {
-    if (this.props.loggedIn) {
+    const { loggedIn } = this.props;
+    if (loggedIn) {
       return (
         <div className="nav-links">
           <button type="submit" onClick={this.logoutUser}>Logout</button>
@@ -29,8 +31,9 @@ class NavBar extends React.Component {
   }
 
   logoutUser(e) {
+    const { logout } = this.props;
     e.preventDefault();
-    this.props.logout();
+    logout();
   }
 
   static renderLogo() {
@@ -48,5 +51,10 @@ class NavBar extends React.Component {
     );
   }
 }
+
+NavBar.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired,
+};
 
 export default NavBar;

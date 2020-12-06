@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -16,12 +17,13 @@ class LoginForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
+    const { email, password } = this.state;
+    const { login } = this.props;
     const user = {
-      email: this.state.email,
-      password: this.state.password,
+      email,
+      password,
     };
-    this.props.login(user);
+    login(user);
   }
 
   update(field) {
@@ -47,19 +49,20 @@ class LoginForm extends React.Component {
   }
 
   render() {
+    const { email, password } = this.state;
     return (
       <div className="login-form-container">
         <form onSubmit={this.handleSubmit}>
           <div className="login-form">
             <input
               type="text"
-              value={this.state.email}
+              value={email}
               onChange={this.update('email')}
               placeholder="Email"
             />
             <input
               type="password"
-              value={this.state.password}
+              value={password}
               onChange={this.update('password')}
               placeholder="Password"
             />
@@ -71,5 +74,10 @@ class LoginForm extends React.Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  errors: PropTypes.instanceOf(Array).isRequired,
+  login: PropTypes.func.isRequired,
+};
 
 export default withRouter(LoginForm);

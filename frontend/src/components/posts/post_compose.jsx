@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './post_compose.css';
 
 class PostCompose extends React.Component {
@@ -15,12 +16,13 @@ class PostCompose extends React.Component {
 
   handleSubmit(e) {
     const { text } = this.state;
+    const { composePost } = this.props;
     e.preventDefault();
     const post = {
       text,
     };
 
-    this.props.composePost(post);
+    composePost(post);
     this.setState({ text: '' });
   }
 
@@ -67,5 +69,10 @@ class PostCompose extends React.Component {
     );
   }
 }
+
+PostCompose.propTypes = {
+  errors: PropTypes.instanceOf(Array).isRequired,
+  composePost: PropTypes.func.isRequired,
+};
 
 export default PostCompose;

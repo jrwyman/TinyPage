@@ -1,16 +1,19 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import './feed.css';
+import PropTypes from 'prop-types';
 import PostComposeContainer from '../posts/post_compose_container';
+import './feed.css';
 
 class Feed extends React.Component {
   componentDidMount() {
-    this.props.fetchPosts();
+    const { fetchPosts } = this.props;
+    fetchPosts();
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.newPost !== prevProps.newPost) {
-      this.props.fetchPosts();
+    const { newPost, fetchPosts } = this.props;
+    if (newPost !== prevProps.newPost) {
+      fetchPosts();
     }
   }
 
@@ -25,7 +28,7 @@ class Feed extends React.Component {
         <PostComposeContainer />
         <div className="feed-posts">
           {posts.map((post) => (
-            <div className="feed-post" key={post._id}>
+            <div className="feed-post" key={post.id}>
               <h3>{post.user.username}</h3>
               <p className="feed-post-text">{post.text}</p>
             </div>
@@ -35,5 +38,11 @@ class Feed extends React.Component {
     );
   }
 }
+
+Feed.propTypes = {
+  fetchPosts: PropTypes.func.isRequired,
+  posts: PropTypes.instanceOf(Array).isRequired,
+  newPost: PropTypes.instanceOf(Object).isRequired,
+};
 
 export default withRouter(Feed);
