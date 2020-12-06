@@ -3,7 +3,7 @@ import session from './session_reducer';
 import posts from './posts_reducer';
 
 const RootReducer = combineReducers({
-    session, posts
+  session, posts,
 });
 
 export default RootReducer;
