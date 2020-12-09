@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_util';
 import { logout } from './actions/session_actions';
@@ -23,9 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     store = configureStore({});
   }
-  
   const root = document.getElementById('root');
 
   ReactDOM.render(<Root store={store} />, root);
 });
-

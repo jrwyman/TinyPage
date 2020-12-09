@@ -1,11 +1,12 @@
-.profile-card {
+.feed-card {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
 }
 
-.profile-post {
+
+.feed-post {
     padding: 50px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -14,6 +15,6 @@
     background-color: white;
 }
 
-.profile-post-text {
+.feed-post-text {
     overflow-wrap: break-word;
 }
