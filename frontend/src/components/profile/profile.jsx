@@ -27,7 +27,8 @@ class Profile extends React.Component {
         <PostComposeContainer />
         <div className="profile-posts">
           {posts.map((post) => (
-            <div className="profile-post" key={post.id}>
+            // eslint-disable-next-line no-underscore-dangle
+            <div className="profile-post" key={post._id}>
               <p className="profile-post-text">{post.text}</p>
             </div>
           ))}
@@ -39,9 +40,13 @@ class Profile extends React.Component {
 
 Profile.propTypes = {
   posts: PropTypes.instanceOf(Array).isRequired,
-  newPost: PropTypes.instanceOf(Object).isRequired,
+  newPost: PropTypes.instanceOf(Object),
   currentUser: PropTypes.instanceOf(Object).isRequired,
   fetchUserPosts: PropTypes.func.isRequired,
+};
+
+Profile.defaultProps = {
+  newPost: undefined,
 };
 
 export default Profile;

@@ -59,12 +59,14 @@ class LoginForm extends React.Component {
               value={email}
               onChange={this.update('email')}
               placeholder="Email"
+              autoComplete="on"
             />
             <input
               type="password"
               value={password}
               onChange={this.update('password')}
               placeholder="Password"
+              autoComplete="on"
             />
             <input className="login-submit" type="submit" value="Log In" />
             {this.renderErrors()}
@@ -76,8 +78,12 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  errors: PropTypes.instanceOf(Array).isRequired,
+  errors: PropTypes.instanceOf(Object),
   login: PropTypes.func.isRequired,
+};
+
+LoginForm.defaultProps = {
+  errors: undefined,
 };
 
 export default withRouter(LoginForm);

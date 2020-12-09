@@ -1,7 +1,7 @@
 import {
-  RECEIVE_CURRENT_USER,
-  RECEIVE_USER_LOGOUT,
   RECEIVE_USER_SIGN_IN,
+  RECEIVE_USER_LOGOUT,
+  RECEIVE_USER_SIGN_UP,
   RECEIVE_SESSION_ERRORS,
 } from '../actions/session_actions';
 
@@ -9,12 +9,11 @@ const initialState = {
   isAuthenticated: false,
   user: {},
   errors: [],
-  isSignedIn: false,
 };
 
 const session = (state = initialState, action) => {
   switch (action.type) {
-    case RECEIVE_CURRENT_USER:
+    case RECEIVE_USER_SIGN_IN:
       return {
         ...state,
         isAuthenticated: !!action.currentUser,
@@ -26,10 +25,9 @@ const session = (state = initialState, action) => {
         isAuthenticated: false,
         user: undefined,
       };
-    case RECEIVE_USER_SIGN_IN:
+    case RECEIVE_USER_SIGN_UP:
       return {
         ...state,
-        isSignedIn: true,
       };
     case RECEIVE_SESSION_ERRORS:
       return {

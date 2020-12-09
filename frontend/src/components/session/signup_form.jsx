@@ -17,13 +17,6 @@ class SignupForm extends React.Component {
     this.clearedErrors = false;
   }
 
-  componentDidUpdate() {
-    const { signedIn, history } = this.props;
-    if (signedIn === true) {
-      history.push('/login');
-    }
-  }
-
   handleSubmit(e) {
     const {
       email, username, password, password2,
@@ -38,6 +31,7 @@ class SignupForm extends React.Component {
     };
 
     signup(user, history);
+    history.push('/login');
   }
 
   update(field) {
@@ -75,24 +69,28 @@ class SignupForm extends React.Component {
               value={email}
               onChange={this.update('email')}
               placeholder="Email"
+              autoComplete="on"
             />
             <input
               type="text"
               value={username}
               onChange={this.update('username')}
               placeholder="Username"
+              autoComplete="on"
             />
             <input
               type="password"
               value={password}
               onChange={this.update('password')}
               placeholder="Password"
+              autoComplete="on"
             />
             <input
               type="password"
               value={password2}
               onChange={this.update('password2')}
               placeholder="Confirm Password"
+              autoComplete="on"
             />
             <input className="signup-submit" type="submit" value="Sign Up" />
             {this.renderErrors()}
@@ -104,10 +102,13 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-  signedIn: PropTypes.bool.isRequired,
   signup: PropTypes.func.isRequired,
-  errors: PropTypes.instanceOf(Array).isRequired,
+  errors: PropTypes.instanceOf(Object),
   history: PropTypes.instanceOf(Object).isRequired,
+};
+
+SignupForm.defaultProps = {
+  errors: undefined,
 };
 
 export default withRouter(SignupForm);

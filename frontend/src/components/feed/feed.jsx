@@ -28,7 +28,8 @@ class Feed extends React.Component {
         <PostComposeContainer />
         <div className="feed-posts">
           {posts.map((post) => (
-            <div className="feed-post" key={post.id}>
+            // eslint-disable-next-line no-underscore-dangle
+            <div className="feed-post" key={post._id}>
               <h3>{post.user.username}</h3>
               <p className="feed-post-text">{post.text}</p>
             </div>
@@ -42,7 +43,11 @@ class Feed extends React.Component {
 Feed.propTypes = {
   fetchPosts: PropTypes.func.isRequired,
   posts: PropTypes.instanceOf(Array).isRequired,
-  newPost: PropTypes.instanceOf(Object).isRequired,
+  newPost: PropTypes.instanceOf(Object),
+};
+
+Feed.defaultProps = {
+  newPost: undefined,
 };
 
 export default withRouter(Feed);

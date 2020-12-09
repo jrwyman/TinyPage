@@ -1,5 +1,8 @@
-// {
-//   "extends": "airbnb"
-// }
-
-// UNCOMMENT TO ALLOW LINTING
+{
+  "extends": "airbnb",
+  "globals": {
+    "localStorage": true,
+    "document": true,
+    "window": true
+  }
+}

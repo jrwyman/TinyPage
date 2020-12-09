@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import App from './app';
 
 const Root = ({ store }) => (
@@ -10,5 +11,9 @@ const Root = ({ store }) => (
     </HashRouter>
   </Provider>
 );
+
+Root.propTypes = {
+  store: PropTypes.instanceOf(Object).isRequired,
+};
 
 export default Root;
