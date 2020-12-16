@@ -30,8 +30,11 @@ class SignupForm extends React.Component {
       password2,
     };
 
-    signup(user, history);
-    history.push('/login');
+    signup(user, history).then((action) => {
+      if (action.type === 'RECEIVE_USER_SIGN_UP') {
+        history.push('/login');
+      }
+    });
   }
 
   update(field) {
