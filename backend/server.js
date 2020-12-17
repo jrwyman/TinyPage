@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const PORT = (process.env.PORT || 5000);
 const db = require('./config/keys').mongoURI;
 const passport = require('passport');
+const path = require('path');
 
 const users = require('./routes/users');
 const posts = require('./routes/posts')
@@ -26,6 +27,11 @@ require('./config/passport')(passport);
 app.use("/users", users);
 app.use("/posts", posts);
 
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.listen(PORT, function () {
     console.log("Server is running on Port: " + PORT);
