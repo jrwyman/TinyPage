@@ -18,9 +18,6 @@ class Profile extends React.Component {
 
   render() {
     const { posts, currentUser } = this.props;
-    if (posts.length === 0) {
-      return (<div>This user has no Posts</div>);
-    }
     return (
       <div className="profile-card">
         <h1 className="profile-header">{currentUser.username}</h1>

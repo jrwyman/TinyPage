@@ -7,17 +7,27 @@ const Post = require('../models/Post');
 const User = require('../models/User');
 const validatePostInput = require('../validation/posts');
 
+router.patch('/:id/like', (req, res) => {
+    Post.findById(req.params.id)
+        .then(post => {
+            post.likes += 1;
+            post.save();
+            res.json(post);
+        })
+        .catch(err => res.status(404).json({ error: 'No Post Found' }))
+});
+
 router.get('/', (req, res) => {
     Post.find()
         .sort({ date: -1 })
         .then(posts => res.json(posts))
-        .catch(err => res.status(404).json({ error: 'No posts found' }));
+        .catch(err => res.status(404).json({ error: 'No Posts Found' }));
 });
 
 router.get('/user/:user_id', (req, res) => {
     Post.find({ "user.id": req.params.user_id })
         .then(posts => res.json(posts))
-        .catch(err => res.status(404).json({ error: 'User not found' }));
+        .catch(err => res.status(404).json({ error: 'NO Posts Found' }));
     
 });
 
