@@ -42,7 +42,7 @@ class Feed extends React.Component {
               <h3>{post.user.username}</h3>
               <p className="feed-post-text">{post.text}</p>
               <span className="feed-post-likes">
-                <button id={post._id} onClick={this.handleClick} type="submit">{`♡ ${post.likes}`}</button>
+                <button id={post._id} onClick={this.handleClick} type="submit">{`♡ ${post.likes.length}`}</button>
               </span>
             </div>
           ))}
