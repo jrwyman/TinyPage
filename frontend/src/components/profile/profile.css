@@ -17,3 +17,23 @@
 .profile-post-text {
     overflow-wrap: break-word;
 }
+
+.profile-post-likes {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.profile-post-likes-submit {
+    border: none;
+    background: none;
+    margin-right: 5px;
+}
+
+.profile-post-likes-count {
+    padding-top: 2px;
+}
+
+.profile-post-likes-submit:focus {
+    outline: none;
+}

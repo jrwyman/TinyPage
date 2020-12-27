@@ -1,47 +1,41 @@
-import React from 'react';
+/* eslint-disable no-debugger */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-underscore-dangle */
+import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import PostComposeContainer from '../posts/post_compose_container';
+import PostComposeContainer from '../common/posts/post_compose_container';
+import Post from '../common/posts/post';
 import './feed.css';
 
-class Feed extends React.Component {
-  componentDidMount() {
-    const { fetchPosts } = this.props;
+function Feed({
+  fetchPosts, addLikeToPost, newPost, posts,
+}) {
+  useEffect(() => {
     fetchPosts();
-  }
+  }, [newPost]);
 
-  componentDidUpdate(prevProps) {
-    const { newPost, fetchPosts } = this.props;
-    if (newPost !== prevProps.newPost) {
-      fetchPosts();
-    }
-  }
+  const handleLike = (id) => () => {
+    addLikeToPost(id)
+      .then(() => fetchPosts());
+  };
 
-  render() {
-    const { posts } = this.props;
-    if (posts.length === 0) {
-      return (<div>There are no Posts</div>);
-    }
-    return (
-      <div className="feed-card">
-        <h2>Your Feed</h2>
-        <PostComposeContainer />
-        <div className="feed-posts">
-          {posts.map((post) => (
-            // eslint-disable-next-line no-underscore-dangle
-            <div className="feed-post" key={post._id}>
-              <h3>{post.user.username}</h3>
-              <p className="feed-post-text">{post.text}</p>
-            </div>
-          ))}
-        </div>
+  return (
+    <div className="feed-card">
+      <h2>Your Feed</h2>
+      <PostComposeContainer />
+      <div className="feed-posts">
+        {posts.map((post) => (
+          <Post handleLike={handleLike(post._id)} post={post} />
+        ))}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 Feed.propTypes = {
   fetchPosts: PropTypes.func.isRequired,
+  addLikeToPost: PropTypes.func.isRequired,
   posts: PropTypes.instanceOf(Array).isRequired,
   newPost: PropTypes.instanceOf(Object),
 };

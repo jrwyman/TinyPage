@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { composePost } from '../../actions/post_actions';
+import { composePost } from '../../../actions/post_actions';
 import PostCompose from './post_compose';
 
 const mapStateToProps = (state) => ({

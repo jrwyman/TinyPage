@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchUserPosts } from '../../actions/post_actions';
+import { fetchUserPosts, addLikeToPost } from '../../actions/post_actions';
 import Profile from './profile';
 
 const mapStateToProps = (state) => ({
@@ -10,6 +10,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchUserPosts: (id) => dispatch(fetchUserPosts(id)),
+  addLikeToPost: (id) => dispatch(addLikeToPost(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
