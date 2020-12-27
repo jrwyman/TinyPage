@@ -18,3 +18,23 @@
 .feed-post-text {
     overflow-wrap: break-word;
 }
+
+.feed-post-likes {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.feed-post-likes-submit {
+    border: none;
+    background: none;
+    margin-right: 5px;
+}
+
+.feed-post-likes-count {
+    padding-top: 2px;
+}
+
+.feed-post-likes-submit:focus {
+    outline: none;
+}

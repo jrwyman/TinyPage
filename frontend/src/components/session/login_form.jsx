@@ -1,39 +1,23 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-class LoginForm extends React.Component {
-  constructor(props) {
-    super(props);
+function LoginForm({ errors, login }) {
+  const [fields, setFields] = useState({ email: '', password: '' });
+  const { email, password } = fields;
 
-    this.state = {
-      email: '',
-      password: '',
-    };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderErrors = this.renderErrors.bind(this);
-  }
-
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = this.state;
-    const { login } = this.props;
-    const user = {
-      email,
-      password,
-    };
-    login(user);
-  }
+    login(fields);
+  };
 
-  update(field) {
-    return (e) => this.setState({
-      [field]: e.currentTarget.value,
+  const handleChange = (field) => (e) => {
+    setFields({
+      ...fields,
+      [field]: e.target.value,
     });
-  }
+  };
 
-  renderErrors() {
-    const { errors } = this.props;
+  const renderErrors = () => {
     if (errors) {
       return (
         <ul>
@@ -46,35 +30,32 @@ class LoginForm extends React.Component {
       );
     }
     return null;
-  }
+  };
 
-  render() {
-    const { email, password } = this.state;
-    return (
-      <div className="login-form-container">
-        <form onSubmit={this.handleSubmit}>
-          <div className="login-form">
-            <input
-              type="text"
-              value={email}
-              onChange={this.update('email')}
-              placeholder="Email"
-              autoComplete="on"
-            />
-            <input
-              type="password"
-              value={password}
-              onChange={this.update('password')}
-              placeholder="Password"
-              autoComplete="on"
-            />
-            <input className="login-submit" type="submit" value="Log In" />
-            {this.renderErrors()}
-          </div>
-        </form>
-      </div>
-    );
-  }
+  return (
+    <div className="login-form-container">
+      <form onSubmit={handleSubmit}>
+        <div className="login-form">
+          <input
+            type="text"
+            value={email}
+            onChange={handleChange('email')}
+            placeholder="Email"
+            autoComplete="on"
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={handleChange('password')}
+            placeholder="Password"
+            autoComplete="on"
+          />
+          <input className="login-submit" type="submit" value="Log In" />
+          {renderErrors()}
+        </div>
+      </form>
+    </div>
+  );
 }
 
 LoginForm.propTypes = {
@@ -86,4 +67,4 @@ LoginForm.defaultProps = {
   errors: undefined,
 };
 
-export default withRouter(LoginForm);
+export default LoginForm;

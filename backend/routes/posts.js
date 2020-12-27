@@ -28,13 +28,14 @@ router.patch('/:id/like',
 
 router.get('/', (req, res) => {
   Post.find()
-    .sort({ date: -1 })
+    .sort({ createdAt: 'desc' })
     .then((posts) => res.json(posts))
     .catch((err) => res.status(404).json({ error: err }));
 });
 
 router.get('/user/:user_id', (req, res) => {
   Post.find({ 'user.id': req.params.user_id })
+    .sort({ createdAt: 'desc' })
     .then((posts) => res.json(posts))
     .catch((err) => res.status(404).json({ error: err }));
 });
