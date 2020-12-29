@@ -1,22 +1,23 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import PostComposeContainer from '../common/posts/post_compose_container';
+import { fetchUserPosts } from '../../actions/post_actions';
 import Post from '../common/posts/post';
 import './profile.css';
 
 function Profile({
-  posts, newPost, currentUser, fetchUserPosts, addLikeToPost,
+  posts, newPost, currentUser,
 }) {
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchUserPosts(currentUser.id);
+    dispatch(fetchUserPosts(currentUser.id));
   }, [newPost]);
 
-  const handleLike = (id) => () => {
-    addLikeToPost(id)
-      .then(() => fetchUserPosts(currentUser.id));
-  };
+  const handleFetchUserPosts = () => dispatch(fetchUserPosts(currentUser.id));
 
   return (
     <div className="profile">
@@ -24,7 +25,7 @@ function Profile({
       <PostComposeContainer />
       <div className="profile-posts">
         {posts.map((post) => (
-          <Post handleLike={handleLike(post._id)} post={post} />
+          <Post fetchPosts={handleFetchUserPosts} post={post} />
         ))}
       </div>
     </div>
@@ -35,12 +36,10 @@ Profile.propTypes = {
   posts: PropTypes.instanceOf(Array).isRequired,
   newPost: PropTypes.instanceOf(Object),
   currentUser: PropTypes.instanceOf(Object).isRequired,
-  fetchUserPosts: PropTypes.func.isRequired,
-  addLikeToPost: PropTypes.func.isRequired,
 };
 
 Profile.defaultProps = {
   newPost: undefined,
 };
 
-export default withRouter(Profile);
+export default Profile;

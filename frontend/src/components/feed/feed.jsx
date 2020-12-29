@@ -2,31 +2,32 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import PostComposeContainer from '../common/posts/post_compose_container';
+import { fetchPosts } from '../../actions/post_actions';
 import Post from '../common/posts/post';
 import './feed.css';
 
 function Feed({
-  fetchPosts, addLikeToPost, newPost, posts,
+  newPost, posts,
 }) {
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchPosts();
+    dispatch(fetchPosts());
   }, [newPost]);
 
-  const handleLike = (id) => () => {
-    addLikeToPost(id)
-      .then(() => fetchPosts());
-  };
+  const handleFetchPosts = () => dispatch(fetchPosts());
 
   return (
     <div className="feed">
-      <h2>Your Feed</h2>
+      <h2 className="profile-header">Your Feed</h2>
       <PostComposeContainer />
       <div className="feed-posts">
         {posts.map((post) => (
-          <Post handleLike={handleLike(post._id)} post={post} />
+          <Post fetchPosts={handleFetchPosts} post={post} />
         ))}
       </div>
     </div>
@@ -34,8 +35,6 @@ function Feed({
 }
 
 Feed.propTypes = {
-  fetchPosts: PropTypes.func.isRequired,
-  addLikeToPost: PropTypes.func.isRequired,
   posts: PropTypes.instanceOf(Array).isRequired,
   newPost: PropTypes.instanceOf(Object),
 };
@@ -44,4 +43,4 @@ Feed.defaultProps = {
   newPost: undefined,
 };
 
-export default withRouter(Feed);
+export default Feed;
