@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+
 import { fetchPosts, addLikeToPost } from '../../actions/post_actions';
 import Feed from './feed';
 

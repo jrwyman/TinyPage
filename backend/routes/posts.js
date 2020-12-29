@@ -26,6 +26,22 @@ router.patch('/:id/like',
       .catch((err) => res.status(404).json({ error: err }));
   });
 
+router.patch('/:id/comment',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Post.findById(req.params.id)
+      .then((post) => {
+        post.comments.push({
+          user_id: req.user.id,
+          username: req.user.username,
+          text: req.body.text,
+        });
+        post.save();
+        res.json(post);
+      })
+      .catch((err) => res.status(404).json({ error: err }));
+  });
+
 router.get('/', (req, res) => {
   Post.find()
     .sort({ createdAt: 'desc' })

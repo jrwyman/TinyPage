@@ -1,16 +1,32 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import LikeBox from '../likebox';
 
-function Post({ post, handleLike }) {
+import { addLikeToPost } from '../../../actions/post_actions';
+import LikeBox from '../likebox';
+import CommentBox from '../commentbox';
+import './post.css';
+
+function Post({ post, fetchPosts }) {
   const {
-    user: { username }, _id: postId, text, likes,
+    user: { username }, _id: postId, text, likes, comments,
   } = post;
+
+  const dispatch = useDispatch();
+
+  const handleLike = async () => {
+    await dispatch(addLikeToPost(postId));
+    fetchPosts();
+  };
+
   return (
-    <div className="feed-post" key={postId}>
+    <div className="post" key={postId}>
       <h3>{username}</h3>
-      <p className="feed-post-text">{text}</p>
-      <LikeBox likes={likes} handleLike={handleLike} />
+      <p className="post-text">{text}</p>
+      <div className="post-actions">
+        <CommentBox comments={comments} />
+        <LikeBox likes={likes} handleLike={handleLike} />
+      </div>
     </div>
   );
 }
@@ -23,8 +39,13 @@ Post.propTypes = {
     _id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     likes: PropTypes.arrayOf(PropTypes.string).isRequired,
+    comments: PropTypes.arrayOf(PropTypes.shape({
+      user_id: PropTypes.string,
+      username: PropTypes.string,
+      text: PropTypes.string,
+    })),
   }).isRequired,
-  handleLike: PropTypes.func.isRequired,
+  fetchPosts: PropTypes.func.isRequired,
 };
 
 export default Post;

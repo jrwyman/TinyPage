@@ -1,0 +1,18 @@
+.post {
+    padding: 50px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .1);
+    width: 500px;
+    background-color: white;
+}
+
+.post-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.post-text {
+    overflow-wrap: break-word;
+}
