@@ -1,0 +1,22 @@
+.likes {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  max-height: 30px;
+}
+
+.likes-submit {
+    border: none;
+    background: none;
+    margin-right: 5px;
+    font-size: 22px;
+}
+
+.likes-count {
+    padding-top: 2px;
+    font-size: 22px;
+}
+
+.likes-submit:focus {
+    outline: none;
+}

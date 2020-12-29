@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './likebox.css';
 
 function LikeBox({ likes, handleLike }) {
-  const heartIcon = '♡';
   return (
-    <span className="likes">
+    <div className="likes">
       <button
         className="likes-submit"
         onClick={handleLike}
         type="submit"
       >
-        {heartIcon}
+        🤍
       </button>
       <div className="likes-count">{likes.length}</div>
-    </span>
+    </div>
   );
 }
 

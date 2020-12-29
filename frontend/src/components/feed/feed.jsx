@@ -21,7 +21,7 @@ function Feed({
   };
 
   return (
-    <div className="feed-card">
+    <div className="feed">
       <h2>Your Feed</h2>
       <PostComposeContainer />
       <div className="feed-posts">
