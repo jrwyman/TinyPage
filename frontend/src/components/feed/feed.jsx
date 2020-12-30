@@ -1,5 +1,3 @@
-/* eslint-disable no-debugger */
-/* eslint-disable class-methods-use-this */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -14,6 +12,8 @@ function Feed({
   newPost, posts,
 }) {
   const dispatch = useDispatch();
+
+  // const posts = useSelector()
 
   useEffect(() => {
     dispatch(fetchPosts());

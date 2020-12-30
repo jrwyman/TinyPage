@@ -3,7 +3,7 @@ import { fetchUserPosts, addLikeToPost } from '../../actions/post_actions';
 import Profile from './profile';
 
 const mapStateToProps = (state) => ({
-  posts: Object.values(state.posts.user),
+  userPosts: state.posts.userPosts,
   newPost: state.posts.new,
   currentUser: state.session.user,
 });

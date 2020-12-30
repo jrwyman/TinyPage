@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import {
   getPosts, getUserPosts, writePost, likePost,
 } from '../util/post_util';
@@ -27,14 +28,19 @@ export const receivePostErrors = (errors) => ({
   errors,
 });
 
-export const addLikeToPost = (id) => (dispatch) => (
-  likePost(id)
-    .catch((err) => dispatch(receivePostErrors(err.response.data)))
-);
+export const addLikeToPost = (id) => async (dispatch) => {
+  try {
+    await likePost(id);
+  } catch (e) {
+    dispatch(receivePostErrors(e.response.data));
+  }
+};
 
 export const fetchPosts = () => (dispatch) => (
   getPosts()
-    .then((posts) => dispatch(receivePosts(posts)))
+    .then((posts) => {
+      dispatch(receivePosts(posts));
+    })
     .catch((err) => dispatch(receivePostErrors(err.response.data)))
 );
 

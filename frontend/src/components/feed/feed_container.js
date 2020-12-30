@@ -4,7 +4,7 @@ import { fetchPosts, addLikeToPost } from '../../actions/post_actions';
 import Feed from './feed';
 
 const mapStateToProps = (state) => ({
-  posts: Object.values(state.posts.all),
+  posts: state.posts.all,
   currentUser: state.session.user,
   newPost: state.posts.new,
   errors: state.posts.errors,
