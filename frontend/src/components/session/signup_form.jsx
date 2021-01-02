@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './session.css';
+import './signup.css';
 
-function SignupForm({ signup, errors }) {
+function SignupForm({ signup, error }) {
   const [fields, setFields] = useState({
     email: '',
     username: '',
@@ -34,16 +34,12 @@ function SignupForm({ signup, errors }) {
     });
   };
 
-  const renderErrors = () => {
-    if (errors) {
+  const renderError = () => {
+    if (error) {
       return (
-        <ul>
-          {Object.keys(errors).map((error) => (
-            <li key={`error-${error}`}>
-              {errors[error]}
-            </li>
-          ))}
-        </ul>
+        <div>
+          {error.error}
+        </div>
       );
     }
     return null;
@@ -82,7 +78,7 @@ function SignupForm({ signup, errors }) {
             autoComplete="on"
           />
           <input className="signup-submit" type="submit" value="Sign Up" />
-          {renderErrors()}
+          {renderError()}
         </div>
       </form>
     </div>
@@ -91,11 +87,11 @@ function SignupForm({ signup, errors }) {
 
 SignupForm.propTypes = {
   signup: PropTypes.func.isRequired,
-  errors: PropTypes.instanceOf(Object),
+  error: PropTypes.instanceOf(Object),
 };
 
 SignupForm.defaultProps = {
-  errors: undefined,
+  error: undefined,
 };
 
 export default SignupForm;

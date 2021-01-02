@@ -20,43 +20,6 @@
     padding: 20px; 
 }
 
-.login-form-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-.login-form {
-    display: flex;
-    background-color: white;
-    flex-direction: column;
-    justify-content: center;
-    padding: 20px;
-    width: 400px;
-}
-
-.login-form-container input {
-    border-radius: 5px;
-    border: 1px solid lightgrey;
-    margin: 10px;
-    padding: 20px; 
-}
-
-.login-submit {
-  background-color: #4551fd;
-  color: white;
-  padding: 15px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.login-submit:hover {
-  background-color: #1423f5;
-}
-
 .signup-submit {
   background-color: #4551fd;
   color: white;

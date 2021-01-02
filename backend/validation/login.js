@@ -1,27 +1,20 @@
-/* eslint-disable no-param-reassign */
 const Validator = require('validator');
-const validText = require('./valid-text');
 
-module.exports = function validateLoginInput(data) {
-  const errors = {};
+function validateLoginInput(data) {
+  const { email } = data;
+  const { password } = data;
 
-  data.email = validText(data.email) ? data.email : '';
-  data.password = validText(data.password) ? data.password : '';
-
-  if (!Validator.isEmail(data.email)) {
-    errors.email = 'Email is invalid';
+  if (Validator.isEmpty(email)) {
+    return 'Email field is required';
   }
 
-  if (Validator.isEmpty(data.email)) {
-    errors.email = 'Email field is required';
+  if (!Validator.isEmail(email)) {
+    return 'Email is invalid';
   }
 
-  if (Validator.isEmpty(data.password)) {
-    errors.password = 'Password field is required';
+  if (Validator.isEmpty(password)) {
+    return 'Password field is required';
   }
+}
 
-  return {
-    errors,
-    isValid: Object.keys(errors).length === 0,
-  };
-};
+module.exports = validateLoginInput;

@@ -2,33 +2,38 @@ import {
   RECEIVE_POSTS,
   RECEIVE_USER_POSTS,
   RECEIVE_NEW_POST,
-  RECEIVE_POST_ERRORS,
+  RECEIVE_POST_ERROR,
 } from '../actions/post_actions';
 
 const initialState = {
-  all: {},
-  user: {},
+  all: [],
+  userPosts: [],
   new: undefined,
-  errors: [],
+  error: {},
 };
 
 const posts = (state = initialState, action) => {
   Object.freeze(state);
-  const newState = { ...state };
   switch (action.type) {
     case RECEIVE_POSTS:
-      newState.all = action.posts.data;
-      return newState;
-    case RECEIVE_USER_POSTS:
-      newState.user = action.posts.data;
-      return newState;
-    case RECEIVE_NEW_POST:
-      newState.new = action.post.data;
-      return newState;
-    case RECEIVE_POST_ERRORS:
       return {
         ...state,
-        errors: action.errors,
+        all: action.posts,
+      };
+    case RECEIVE_USER_POSTS:
+      return {
+        ...state,
+        userPosts: action.posts,
+      };
+    case RECEIVE_NEW_POST:
+      return {
+        ...state,
+        new: action.post,
+      };
+    case RECEIVE_POST_ERROR:
+      return {
+        ...state,
+        error: action.error,
       };
     default:
       return state;

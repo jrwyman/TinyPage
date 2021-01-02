@@ -1,5 +1,4 @@
 /* eslint-disable eqeqeq */
-/* eslint-disable no-param-reassign */
 const express = require('express');
 
 const router = express.Router();
@@ -59,9 +58,10 @@ router.get('/user/:user_id', (req, res) => {
 router.post('/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    const { errors, isValid } = validatePostInput(req.body);
-    if (!isValid) {
-      return res.status(400).json(errors);
+    const error = validatePostInput(req.body);
+    
+    if (error) {
+      return res.status(400).json({error});
     }
     const newPost = new Post({
       user: {

@@ -9,7 +9,7 @@ import Post from '../common/posts/post';
 import './profile.css';
 
 function Profile({
-  posts, newPost, currentUser,
+  userPosts, newPost, currentUser,
 }) {
   const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ function Profile({
       <h2 className="profile-header">{`${currentUser.username}'s Profile`}</h2>
       <PostComposeContainer />
       <div className="profile-posts">
-        {posts.map((post) => (
+        {userPosts.map((post) => (
           <Post fetchPosts={handleFetchUserPosts} post={post} />
         ))}
       </div>
@@ -33,7 +33,7 @@ function Profile({
 }
 
 Profile.propTypes = {
-  posts: PropTypes.instanceOf(Array).isRequired,
+  userPosts: PropTypes.instanceOf(Array).isRequired,
   newPost: PropTypes.instanceOf(Object),
   currentUser: PropTypes.instanceOf(Object).isRequired,
 };

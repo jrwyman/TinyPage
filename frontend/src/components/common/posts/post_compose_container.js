@@ -5,7 +5,7 @@ import PostCompose from './post_compose';
 const mapStateToProps = (state) => ({
   currentUser: state.session.user,
   newPost: state.posts.new,
-  errors: state.posts.errors,
+  error: state.posts.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({

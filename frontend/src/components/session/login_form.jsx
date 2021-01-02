@@ -1,7 +1,9 @@
+/* eslint-disable no-debugger */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import './login.css';
 
-function LoginForm({ errors, login }) {
+function LoginForm({ error, login }) {
   const [fields, setFields] = useState({ email: '', password: '' });
   const { email, password } = fields;
 
@@ -17,16 +19,12 @@ function LoginForm({ errors, login }) {
     });
   };
 
-  const renderErrors = () => {
-    if (errors) {
+  const renderError = () => {
+    if (error) {
       return (
-        <ul>
-          {Object.keys(errors).map((error) => (
-            <li key={`error-${error}`}>
-              {errors[error]}
-            </li>
-          ))}
-        </ul>
+        <div>
+          {error.error}
+        </div>
       );
     }
     return null;
@@ -51,7 +49,7 @@ function LoginForm({ errors, login }) {
             autoComplete="on"
           />
           <input className="login-submit" type="submit" value="Log In" />
-          {renderErrors()}
+          {renderError()}
         </div>
       </form>
     </div>
@@ -59,12 +57,12 @@ function LoginForm({ errors, login }) {
 }
 
 LoginForm.propTypes = {
-  errors: PropTypes.instanceOf(Object),
+  error: PropTypes.instanceOf(Object),
   login: PropTypes.func.isRequired,
 };
 
 LoginForm.defaultProps = {
-  errors: undefined,
+  error: undefined,
 };
 
 export default LoginForm;
