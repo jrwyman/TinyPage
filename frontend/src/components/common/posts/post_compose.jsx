@@ -25,7 +25,7 @@ function PostCompose({ errors, composePost }) {
         <ul>
           {Object.keys(errors).map((error) => (
             <li key={`error-${error}`}>
-              {errors[error]}
+              {error}
             </li>
           ))}
         </ul>

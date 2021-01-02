@@ -50,8 +50,11 @@ export const fetchUserPosts = (id) => (dispatch) => (
     .catch((err) => dispatch(receivePostErrors(err.response.data)))
 );
 
-export const composePost = (data) => (dispatch) => (
-  writePost(data)
-    .then((post) => dispatch(receiveNewPost(post)))
-    .catch((err) => dispatch(receivePostErrors(err.response.data)))
-);
+export const composePost = (data) => async (dispatch) => {
+  try {
+    const post = await writePost(data);
+    dispatch(receiveNewPost(post));
+  } catch (e) {
+    dispatch(receivePostErrors(e.response.data));
+  }
+};

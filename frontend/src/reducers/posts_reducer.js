@@ -9,7 +9,7 @@ const initialState = {
   all: [],
   userPosts: [],
   new: undefined,
-  errors: [],
+  errors: {},
 };
 
 const posts = (state = initialState, action) => {

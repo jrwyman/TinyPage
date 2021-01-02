@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import axios from 'axios';
 
 export const getPosts = async () => {
@@ -19,12 +20,8 @@ export const getUserPosts = async (id) => {
 };
 
 export const writePost = async (data) => {
-  try {
-    const response = await axios.post('/posts/', data);
-    return response.data;
-  } catch (e) {
-    throw new Error('Error creating post', e);
-  }
+  const response = await axios.post('/posts/', data);
+  return response.data;
 };
 
 export const likePost = async (id) => {

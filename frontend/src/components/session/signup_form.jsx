@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './session.css';
 
-function SignupForm({ signup, errors }) {
+function SignupForm({ signup, error }) {
   const [fields, setFields] = useState({
     email: '',
     username: '',
@@ -35,15 +35,11 @@ function SignupForm({ signup, errors }) {
   };
 
   const renderErrors = () => {
-    if (errors) {
+    if (error) {
       return (
-        <ul>
-          {Object.keys(errors).map((error) => (
-            <li key={`error-${error}`}>
-              {errors[error]}
-            </li>
-          ))}
-        </ul>
+        <div>
+          {error.error}
+        </div>
       );
     }
     return null;
@@ -91,11 +87,11 @@ function SignupForm({ signup, errors }) {
 
 SignupForm.propTypes = {
   signup: PropTypes.func.isRequired,
-  errors: PropTypes.instanceOf(Object),
+  error: PropTypes.instanceOf(Object),
 };
 
 SignupForm.defaultProps = {
-  errors: undefined,
+  error: undefined,
 };
 
 export default SignupForm;
