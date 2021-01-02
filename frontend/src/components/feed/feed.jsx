@@ -1,19 +1,16 @@
-/* eslint-disable no-underscore-dangle */
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
-import PostComposeContainer from '../common/posts/post_compose_container';
+import PostCompose from '../common/posts/post_compose';
 import { fetchPosts } from '../../actions/post_actions';
 import Post from '../common/posts/post';
 import './feed.css';
 
-function Feed({
-  newPost, posts,
-}) {
-  const dispatch = useDispatch();
+function Feed() {
+  const posts = useSelector((state) => state.posts.all);
+  const newPost = useSelector((state) => state.posts.new);
 
-  // const posts = useSelector()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -24,7 +21,7 @@ function Feed({
   return (
     <div className="feed">
       <h2 className="profile-header">Your Feed</h2>
-      <PostComposeContainer />
+      <PostCompose />
       <div className="feed-posts">
         {posts.map((post) => (
           <Post fetchPosts={handleFetchPosts} post={post} />
@@ -33,14 +30,5 @@ function Feed({
     </div>
   );
 }
-
-Feed.propTypes = {
-  posts: PropTypes.instanceOf(Array).isRequired,
-  newPost: PropTypes.instanceOf(Object),
-};
-
-Feed.defaultProps = {
-  newPost: undefined,
-};
 
 export default Feed;
