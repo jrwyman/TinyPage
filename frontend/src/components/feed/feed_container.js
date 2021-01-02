@@ -7,7 +7,7 @@ const mapStateToProps = (state) => ({
   posts: state.posts.all,
   currentUser: state.session.user,
   newPost: state.posts.new,
-  errors: state.posts.errors,
+  error: state.posts.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({

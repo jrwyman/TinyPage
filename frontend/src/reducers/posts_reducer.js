@@ -2,14 +2,14 @@ import {
   RECEIVE_POSTS,
   RECEIVE_USER_POSTS,
   RECEIVE_NEW_POST,
-  RECEIVE_POST_ERRORS,
+  RECEIVE_POST_ERROR,
 } from '../actions/post_actions';
 
 const initialState = {
   all: [],
   userPosts: [],
   new: undefined,
-  errors: {},
+  error: {},
 };
 
 const posts = (state = initialState, action) => {
@@ -30,10 +30,10 @@ const posts = (state = initialState, action) => {
         ...state,
         new: action.post,
       };
-    case RECEIVE_POST_ERRORS:
+    case RECEIVE_POST_ERROR:
       return {
         ...state,
-        errors: action.errors,
+        error: action.error,
       };
     default:
       return state;

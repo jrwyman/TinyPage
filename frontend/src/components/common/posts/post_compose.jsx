@@ -1,8 +1,9 @@
+/* eslint-disable no-debugger */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './post_compose.css';
 
-function PostCompose({ errors, composePost }) {
+function PostCompose({ error, composePost }) {
   const [text, setText] = useState('');
 
   const handleSubmit = (e) => {
@@ -19,23 +20,19 @@ function PostCompose({ errors, composePost }) {
     setText(e.currentTarget.value);
   };
 
-  const renderErrors = () => {
-    if (errors) {
+  const renderError = () => {
+    if (error) {
       return (
-        <ul>
-          {Object.keys(errors).map((error) => (
-            <li key={`error-${error}`}>
-              {error}
-            </li>
-          ))}
-        </ul>
+        <div>
+          {error.error}
+        </div>
       );
     }
     return null;
   };
 
   return (
-    <div className="post-compose-card">
+    <div className="post-compose-container">
       <form onSubmit={handleSubmit}>
         <div className="post-compose-form">
           <h3>Create Post</h3>
@@ -46,7 +43,7 @@ function PostCompose({ errors, composePost }) {
             className="post-compose-text"
           />
           <input type="submit" value="Post" className="post-compose-submit" />
-          {renderErrors()}
+          {renderError()}
         </div>
       </form>
     </div>
@@ -54,8 +51,12 @@ function PostCompose({ errors, composePost }) {
 }
 
 PostCompose.propTypes = {
-  errors: PropTypes.instanceOf(Array).isRequired,
+  error: PropTypes.instanceOf(Object),
   composePost: PropTypes.func.isRequired,
+};
+
+PostCompose.defaultProps = {
+  error: undefined,
 };
 
 export default PostCompose;

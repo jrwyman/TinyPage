@@ -6,7 +6,7 @@ import {
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const RECEIVE_NEW_POST = 'RECEIVE_NEW_POST';
 export const RECEIVE_USER_POSTS = 'RECEIVE_USER_POSTS';
-export const RECEIVE_POST_ERRORS = 'RECEIVE_POST_ERRORS';
+export const RECEIVE_POST_ERROR = 'RECEIVE_POST_ERROR';
 
 export const receivePosts = (posts) => ({
   type: RECEIVE_POSTS,
@@ -23,16 +23,16 @@ export const receiveNewPost = (post) => ({
   post,
 });
 
-export const receivePostErrors = (errors) => ({
-  type: RECEIVE_POST_ERRORS,
-  errors,
+export const receivePostError = (error) => ({
+  type: RECEIVE_POST_ERROR,
+  error,
 });
 
 export const addLikeToPost = (id) => async (dispatch) => {
   try {
     await likePost(id);
   } catch (e) {
-    dispatch(receivePostErrors(e.response.data));
+    dispatch(receivePostError(e.response.data));
   }
 };
 
@@ -41,13 +41,13 @@ export const fetchPosts = () => (dispatch) => (
     .then((posts) => {
       dispatch(receivePosts(posts));
     })
-    .catch((err) => dispatch(receivePostErrors(err.response.data)))
+    .catch((err) => dispatch(receivePostError(err.response.data)))
 );
 
 export const fetchUserPosts = (id) => (dispatch) => (
   getUserPosts(id)
     .then((posts) => dispatch(receiveUserPosts(posts)))
-    .catch((err) => dispatch(receivePostErrors(err.response.data)))
+    .catch((err) => dispatch(receivePostError(err.response.data)))
 );
 
 export const composePost = (data) => async (dispatch) => {
@@ -55,6 +55,6 @@ export const composePost = (data) => async (dispatch) => {
     const post = await writePost(data);
     dispatch(receiveNewPost(post));
   } catch (e) {
-    dispatch(receivePostErrors(e.response.data));
+    dispatch(receivePostError(e.response.data));
   }
 };

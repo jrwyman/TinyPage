@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './session.css';
+import './signup.css';
 
 function SignupForm({ signup, error }) {
   const [fields, setFields] = useState({
@@ -34,7 +34,7 @@ function SignupForm({ signup, error }) {
     });
   };
 
-  const renderErrors = () => {
+  const renderError = () => {
     if (error) {
       return (
         <div>
@@ -78,7 +78,7 @@ function SignupForm({ signup, error }) {
             autoComplete="on"
           />
           <input className="signup-submit" type="submit" value="Sign Up" />
-          {renderErrors()}
+          {renderError()}
         </div>
       </form>
     </div>

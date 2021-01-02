@@ -1,6 +1,7 @@
 /* eslint-disable no-debugger */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import './login.css';
 
 function LoginForm({ error, login }) {
   const [fields, setFields] = useState({ email: '', password: '' });
@@ -20,7 +21,6 @@ function LoginForm({ error, login }) {
 
   const renderError = () => {
     if (error) {
-      debugger;
       return (
         <div>
           {error.error}
