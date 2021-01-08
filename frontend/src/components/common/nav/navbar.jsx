@@ -1,13 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { logout } from '../../../actions/session_actions';
 import logo from './TinyPage.png';
 import './nav.css';
 
-function NavBar({ loggedIn, logout }) {
+function NavBar() {
+  const loggedIn = useSelector((state) => state.session.isAuthenticated);
+
+  const dispatch = useDispatch();
+
   const logoutUser = (e) => {
     e.preventDefault();
-    logout();
+    dispatch(logout());
   };
 
   const getLinks = () => {
@@ -39,10 +45,5 @@ function NavBar({ loggedIn, logout }) {
     </div>
   );
 }
-
-NavBar.propTypes = {
-  loggedIn: PropTypes.bool.isRequired,
-  logout: PropTypes.func.isRequired,
-};
 
 export default NavBar;

@@ -1,8 +1,9 @@
-import React from 'react';
+/* eslint-disable no-debugger */
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { addLikeToPost } from '../../../actions/post_actions';
+import { addLikeToPost, addCommentToPost } from '../../../actions/post_actions';
 import LikeBox from '../likebox';
 import CommentBox from '../commentbox';
 import './post.css';
@@ -14,8 +15,20 @@ function Post({ post, fetchPosts }) {
 
   const dispatch = useDispatch();
 
+  const [commentText, setCommentText] = useState('');
+
   const handleLike = async () => {
     await dispatch(addLikeToPost(postId));
+    fetchPosts();
+  };
+
+  const handleChange = (e) => {
+    setCommentText(e.target.value);
+  };
+
+  const handleComment = async (e) => {
+    e.preventDefault();
+    await dispatch(addCommentToPost(postId, commentText));
     fetchPosts();
   };
 
@@ -26,6 +39,10 @@ function Post({ post, fetchPosts }) {
       <div className="post-actions">
         <CommentBox comments={comments} />
         <LikeBox likes={likes} handleLike={handleLike} />
+        <form onSubmit={handleComment}>
+          <input value={commentText} onChange={handleChange} placeholder="Write your comment" type="text" />
+          <input type="submit" value="Post" />
+        </form>
       </div>
     </div>
   );

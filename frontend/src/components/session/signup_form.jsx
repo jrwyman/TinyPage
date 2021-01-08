@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
+
+import { signup } from '../../actions/session_actions';
 import './signup.css';
 
-function SignupForm({ signup, error }) {
+function SignupForm() {
+  const error = useSelector((state) => state.session.error);
+
+  const dispatch = useDispatch();
+
+  const history = useHistory();
+
   const [fields, setFields] = useState({
     email: '',
     username: '',
     password: '',
     password2: '',
   });
-
-  const history = useHistory();
 
   const {
     email, username, password, password2,
@@ -20,7 +26,7 @@ function SignupForm({ signup, error }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    signup(fields, history).then((action) => {
+    dispatch(signup(fields, history)).then((action) => {
       if (action.type === 'RECEIVE_USER_SIGN_UP') {
         history.push('/login');
       }
@@ -84,14 +90,5 @@ function SignupForm({ signup, error }) {
     </div>
   );
 }
-
-SignupForm.propTypes = {
-  signup: PropTypes.func.isRequired,
-  error: PropTypes.instanceOf(Object),
-};
-
-SignupForm.defaultProps = {
-  error: undefined,
-};
 
 export default SignupForm;

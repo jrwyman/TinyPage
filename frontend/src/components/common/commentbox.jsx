@@ -4,13 +4,19 @@ import PropTypes from 'prop-types';
 import './commentbox.css';
 
 function CommentBox({ comments }) {
+  const trigger = (
+    <div className="comments-trigger">
+      <div className="comments-trigger-icon">💬</div>
+      <div className="comments-count">{comments.length}</div>
+    </div>
+  );
+
   return (
     <Collapsible
-      className="comments"
-      openedClassName="comments-open"
+      className="comments-collapsible"
+      openedClassName="comments-open-collapsible"
       triggerWhenOpen="ⓧ"
-      trigger="💬"
-      triggerClassName="comments-trigger"
+      trigger={trigger}
       triggerOpenedClassName="comments-open-trigger"
     >
       {comments.map((comment) => (

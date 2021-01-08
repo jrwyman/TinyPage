@@ -1,16 +1,16 @@
-/* eslint-disable no-underscore-dangle */
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
-import PostComposeContainer from '../common/posts/post_compose_container';
+import PostCompose from '../common/posts/post_compose';
 import { fetchUserPosts } from '../../actions/post_actions';
 import Post from '../common/posts/post';
 import './profile.css';
 
-function Profile({
-  userPosts, newPost, currentUser,
-}) {
+function Profile() {
+  const userPosts = useSelector((state) => state.posts.userPosts);
+  const newPost = useSelector((state) => state.posts.new);
+  const currentUser = useSelector((state) => state.session.user);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function Profile({
   return (
     <div className="profile">
       <h2 className="profile-header">{`${currentUser.username}'s Profile`}</h2>
-      <PostComposeContainer />
+      <PostCompose />
       <div className="profile-posts">
         {userPosts.map((post) => (
           <Post fetchPosts={handleFetchUserPosts} post={post} />
@@ -31,15 +31,5 @@ function Profile({
     </div>
   );
 }
-
-Profile.propTypes = {
-  userPosts: PropTypes.instanceOf(Array).isRequired,
-  newPost: PropTypes.instanceOf(Object),
-  currentUser: PropTypes.instanceOf(Object).isRequired,
-};
-
-Profile.defaultProps = {
-  newPost: undefined,
-};
 
 export default Profile;

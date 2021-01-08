@@ -1,9 +1,15 @@
 /* eslint-disable no-debugger */
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { composePost } from '../../../actions/post_actions';
 import './post_compose.css';
 
-function PostCompose({ error, composePost }) {
+function PostCompose() {
+  const error = useSelector((state) => state.posts.error);
+
+  const dispatch = useDispatch();
+
   const [text, setText] = useState('');
 
   const handleSubmit = (e) => {
@@ -12,7 +18,7 @@ function PostCompose({ error, composePost }) {
       text,
     };
 
-    composePost(post);
+    dispatch(composePost(post));
     setText('');
   };
 
@@ -49,14 +55,5 @@ function PostCompose({ error, composePost }) {
     </div>
   );
 }
-
-PostCompose.propTypes = {
-  error: PropTypes.instanceOf(Object),
-  composePost: PropTypes.func.isRequired,
-};
-
-PostCompose.defaultProps = {
-  error: undefined,
-};
 
 export default PostCompose;

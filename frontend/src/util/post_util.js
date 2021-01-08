@@ -26,9 +26,17 @@ export const writePost = async (data) => {
 
 export const likePost = async (id) => {
   try {
-    // eslint-disable-next-line no-unused-vars
     await axios.patch(`/posts/${id}/like`);
   } catch (e) {
     throw new Error('Error liking post', e);
+  }
+};
+
+export const commentOnPost = async (id, text) => {
+  try {
+    const response = await axios.patch(`/posts/${id}/comment`, { text });
+    return response.data;
+  } catch (e) {
+    throw new Error('Error commenting on post', e);
   }
 };

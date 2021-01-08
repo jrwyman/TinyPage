@@ -1,15 +1,20 @@
-/* eslint-disable no-debugger */
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { login } from '../../actions/session_actions';
 import './login.css';
 
-function LoginForm({ error, login }) {
+function LoginForm() {
+  const error = useSelector((state) => state.session.error);
+
+  const dispatch = useDispatch();
+
   const [fields, setFields] = useState({ email: '', password: '' });
   const { email, password } = fields;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(fields);
+    dispatch(login(fields));
   };
 
   const handleChange = (field) => (e) => {
@@ -55,14 +60,5 @@ function LoginForm({ error, login }) {
     </div>
   );
 }
-
-LoginForm.propTypes = {
-  error: PropTypes.instanceOf(Object),
-  login: PropTypes.func.isRequired,
-};
-
-LoginForm.defaultProps = {
-  error: undefined,
-};
 
 export default LoginForm;
