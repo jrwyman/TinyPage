@@ -24,7 +24,7 @@ function Feed() {
       <PostCompose />
       <div className="feed-posts">
         {posts.map((post) => (
-          <Post fetchPosts={handleFetchPosts} post={post} />
+          <Post key={post.text} fetchPosts={handleFetchPosts} post={post} />
         ))}
       </div>
     </div>

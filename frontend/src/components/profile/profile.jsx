@@ -25,7 +25,7 @@ function Profile() {
       <PostCompose />
       <div className="profile-posts">
         {userPosts.map((post) => (
-          <Post fetchPosts={handleFetchUserPosts} post={post} />
+          <Post key={post.text} fetchPosts={handleFetchUserPosts} post={post} />
         ))}
       </div>
     </div>
