@@ -35,7 +35,7 @@ function NavBar() {
   };
 
   const renderLogo = () => (
-    <img className="logo" src={logo} alt="logo" width="100px" />
+    <Link to="/"><img className="logo" src={logo} alt="logo" width="100px" /></Link>
   );
 
   return (

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
+import Home from './common/home/home';
 import NavBar from './common/nav/navbar';
 import Profile from './profile/profile';
 import LoginForm from './session/login_form';
@@ -12,6 +13,7 @@ const App = () => (
   <div className="app">
     <NavBar />
     <Switch>
+      <Route exact path="/" component={Home} />
       <AuthRoute exact path="/login" component={LoginForm} />
       <AuthRoute exact path="/signup" component={SignupForm} />
 
